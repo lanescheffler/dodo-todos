@@ -1,5 +1,6 @@
 import './App.css';
 import {useSelector} from "react-redux";
+import {Process} from "./components/Process";
 
 function App() {
 
@@ -15,7 +16,7 @@ function App() {
             </p>
             <a
                 className="App-link"
-                href="website"
+                href="editor"
                 target="_blank"
                 rel="noopener noreferrer"
             >
@@ -23,7 +24,7 @@ function App() {
             </a>
             <a
                 className="App-link"
-                href="website"
+                href="follower"
                 target="_blank"
                 rel="noopener noreferrer"
             >
@@ -31,6 +32,18 @@ function App() {
             </a>
           </header>
         </div>
+    )
+  }
+  if(role === 'editor') {
+    return (
+        <>
+          <div style={{backgroundColor: 'grey'}}><h1>Editor</h1></div>
+          <div style={{display: 'flex', justifyContent: "space-evenly", position: "absolute", top: 10, right: 0}}>
+            {/*<button onClick={()=> dispatch({type: GO_HOME})}>Go Home</button>*/}
+            <button>Home</button>
+          </div>
+          <Process/>
+        </>
     )
   }
 }

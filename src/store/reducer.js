@@ -5,15 +5,25 @@ const initState = {
 
     isEditor: false,
     isFollower: false,
-    role: 'home',
+    // role: null,
+    // role: 'home',
+    role: 'editor',
+    // role: 'follower',
 
     token: null,
 
     processList: [],
-    stageList: [],
+    processMessage: "",
+    processEditing: false,
 
     selectedProcess: null,
-    startedProcess: null
+    startedProcess: false,
+
+    stageList: [],
+    stageMessage: "",
+    stageEditing: false,
+
+    selectedStage: null
 
 }
 
@@ -31,6 +41,21 @@ export function reducer(state = initState, action) {
                 isFollower: true,
                 role: "follower"
             }
+        // case GET_PROCESS_LIST:
+        //     return {
+        //         ...state,
+        //         processList: action.processList
+        //     }
+        // case ON_PROCESS_ADD:
+        //     if (action.processInfo.title === '') {
+        //         alert('please enter a title...')
+        //         return {...state}
+        //     }
+        //     return {
+        //         ...state,
+        //         processList:
+        //             [...state.processList, action.processInfo],
+        //     }
         default:
             return {...state}
     }
