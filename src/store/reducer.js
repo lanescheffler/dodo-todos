@@ -5,7 +5,7 @@ const initState = {
 
     isEditor: false,
     isFollower: false,
-    role: null,
+    role: 'home',
 
     token: null,
 
