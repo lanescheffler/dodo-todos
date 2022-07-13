@@ -2,6 +2,8 @@ export const ON_LOGIN_EDITOR = 'reducer/ON_LOGIN_EDITOR';
 export const ON_LOGIN_FOLLOWER = 'reducer/ON_LOGIN_EDITOR';
 
 export const GET_PROCESS_LIST = 'GET_PROCESS_LIST';
+export const ON_SELECTED_TODO = 'ON_SELECTED_TODO';
+export const TO_DO = 'TO_DO';
 
 export const SELECT_PROCESS_TO_EDIT = 'SELECT_PROCCESS_TO_EDIT';
 export const EDITING_PROCESS = "EDITING_PROCESS";
@@ -22,10 +24,13 @@ const initState = {
     processList: [],
     processMessage: "",
     processEditing: false,
+    processToDo: false,
     editFailed: false,
 
     selectedProcess: null,
     selectedToDo: null,
+    toDo: null,
+    toDoOption: null,
 
     startedProcess: false,
 
@@ -66,6 +71,18 @@ export function reducer(state = initState, action) {
         //         processList:
         //             [...state.processList, action.processInfo],
         //     }
+        case ON_SELECTED_TODO:
+            return {
+                ...state,
+                toDoOption: action.select
+            }
+        case TO_DO:
+            return {
+                ...state,
+                processToDo: true,
+                toDo: action.toDo
+            }
+
         case SELECT_PROCESS_TO_EDIT:
             return {
                 ...state,
