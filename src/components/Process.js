@@ -86,7 +86,7 @@ export function Process() {
     if (processEditing) {
         return <>
             <Card className={'w-80 text-center m-auto'}>
-                <CardHeader style={{backgroundColor: "lightblue", color: 'purple'}} className={'fs-3'}>Edit
+                <CardHeader style={{backgroundColor: "white", color: 'black'}} className={'fs-3'}>Edit
                     Process</CardHeader>
                 <Form className={'p-3'} onSubmit={onEditSubmit} style={{backgroundColor: 'lightcyan'}}>
                     <Form.Group className={'mb-3'}>
@@ -103,20 +103,20 @@ export function Process() {
         </>
     }
     return (
-        <Card className={'w-80 text-center m-auto'}>
-            <CardHeader style={{backgroundColor: "white", color: 'black'}} className={'fs-2'}>
+        <Card className={'w-80 text-left m-auto'}>
+            <CardHeader style={{backgroundColor: "brown", color: 'black'}} className={'fs-2'}>
                 CREAT A PROCESS
             </CardHeader>
             <Form className={'p-3'} onSubmit={addProcess} style={{backgroundColor: 'grey'}}>
                 <Form.Group className={'mb-3'}>
                     <Form.Label>Title: </Form.Label>
                     <input onChange={updateTitle} value={formState.title} placeholder="title" type='text'/>
+                    <button type='submit'>Submit</button>
                 </Form.Group>
-                <button type='submit'>Submit</button>
 
             </Form>
             <Card.Footer>
-                    <div><font color="black">This is a footer</font></div>
+                    <div><font color="black">THIS IS A FOOTER</font></div>
             </Card.Footer>
 
         </Card>)
