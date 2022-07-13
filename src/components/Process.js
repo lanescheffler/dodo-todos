@@ -88,25 +88,31 @@ export function Process() {
 
     if (processEditing) {
         return <>
-            <Card className={'w-80 text-center m-auto'}>
-                <CardHeader style={{backgroundColor: "white", color: 'black'}} className={'fs-3'}>Edit
-                    Process</CardHeader>
-                <Form className={'p-3'} onSubmit={onEditSubmit} style={{backgroundColor: 'lightcyan'}}>
+            <Card className={'w-80 text-left m-auto'}>
+                <CardHeader style={{backgroundColor: "brown", color: 'black'}} className={'fs-3'}>
+                    EDITING...
+                </CardHeader>
+                <Form className={'p-3'} onSubmit={onEditSubmit} style={{backgroundColor: 'grey'}}>
                     <Form.Group className={'mb-3'}>
                         <Form.Label>Title</Form.Label>
 
                         <input onChange={updateTitle} value={editState.title}
                                placeholder={selectedProcess[0].title} type='text'/>
+
+                        <button type='submit'>Submit</button>
                     </Form.Group>
-                    <Button type='submit'>Submit</Button>
                 </Form>
+
+                <Card.Footer>
+                    {/*<div><font color="black">please edit your todo...</font></div>*/}
+                </Card.Footer>
             </Card>
         </>
     }
     return (
         <Card className={'w-80 text-left m-auto'}>
-            <CardHeader style={{backgroundColor: "brown", color: 'black'}} className={'fs-2'}>
-                CREAT A PROCESS
+            <CardHeader style={{backgroundColor: "brown", color: 'black'}} className={'fs-3'}>
+                CREAT A TODO
             </CardHeader>
             <Form className={'p-3'} onSubmit={addProcess} style={{backgroundColor: 'grey'}}>
                 <Form.Group className={'mb-3'}>
@@ -114,8 +120,8 @@ export function Process() {
                     <input onChange={updateTitle} value={formState.title} placeholder="title" type='text'/>
                     <button type='submit'>Submit</button>
                 </Form.Group>
-
             </Form>
+
             <Card.Footer>
                 {editFailed && <div><font color="black">ERROR: PLEASE TRY AGAIN</font></div>}
             </Card.Footer>
