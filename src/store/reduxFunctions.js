@@ -71,17 +71,15 @@ export function editProcess(processToDo, title) {
     }
 }
 
-export function deleteProcess(processToDo) {
+export function deleteProcess(process) {
     return async function sideEffect(dispatch) {
         try {
-            const response = await fetch(`http://localhost:8080/deleteUser/${processToDo.title}`, {
+            const response = await fetch(`http://localhost:8080/deleteProcess/${process.processToDo}`, {
                 method: 'DELETE',
                 headers: {
                     "Access-Control-Allow-Origin": "*"
                 },
-                // body: user
             })
-            console.log(await response)
             if (response.ok)
                 console.log("delete successful")
             else {
