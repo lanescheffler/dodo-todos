@@ -95,8 +95,6 @@ export function Process() {
                         <input onChange={updateTitle} value={editState.title}
                                placeholder={selectedProcess[0].title} type='text'/>
                     </Form.Group>
-                    <br/>
-                    <br/>
                     <Button type='submit'>Submit</Button>
                 </Form>
             </Card>
@@ -109,7 +107,7 @@ export function Process() {
             </CardHeader>
             <Form className={'p-3'} onSubmit={addProcess} style={{backgroundColor: 'grey'}}>
                 <Form.Group className={'mb-3'}>
-                    <Form.Label>Title: </Form.Label>
+                    <Form.Label>TITLE: </Form.Label>
                     <input onChange={updateTitle} value={formState.title} placeholder="title" type='text'/>
                     <button type='submit'>Submit</button>
                 </Form.Group>
