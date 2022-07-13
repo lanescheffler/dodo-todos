@@ -74,6 +74,7 @@ export function Process() {
             return
         }
         dispatch(createProcess({formState: formState, newProcess}))
+        setFormState(newProcess)
     }
 
     function onEditSubmit(e) {
