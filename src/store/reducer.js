@@ -1,6 +1,13 @@
 export const ON_LOGIN_EDITOR = 'reducer/ON_LOGIN_EDITOR';
 export const ON_LOGIN_FOLLOWER = 'reducer/ON_LOGIN_EDITOR';
 
+export const GET_PROCESS_LIST = 'GET_PROCESS_LIST';
+
+export const SELECT_PROCESS_TO_EDIT = 'SELECT_PROCCESS_TO_EDIT';
+export const EDITING_PROCESS = "EDITING_PROCESS";
+export const EDIT_SUCCESS = 'EDIT_SUCCESS';
+export const EDIT_FAILURE = 'EDIT_FAILURE';
+
 const initState = {
 
     isEditor: false,
@@ -15,6 +22,7 @@ const initState = {
     processList: [],
     processMessage: "",
     processEditing: false,
+    editFailed: false,
 
     selectedProcess: null,
     startedProcess: false,
@@ -41,11 +49,11 @@ export function reducer(state = initState, action) {
                 isFollower: true,
                 role: "follower"
             }
-        // case GET_PROCESS_LIST:
-        //     return {
-        //         ...state,
-        //         processList: action.processList
-        //     }
+        case GET_PROCESS_LIST:
+            return {
+                ...state,
+                processList: action.processList
+            }
         // case ON_PROCESS_ADD:
         //     if (action.processInfo.title === '') {
         //         alert('please enter a title...')
@@ -56,6 +64,31 @@ export function reducer(state = initState, action) {
         //         processList:
         //             [...state.processList, action.processInfo],
         //     }
+        case SELECT_PROCESS_TO_EDIT:
+            return {
+                ...state,
+                selectedProcess: action.select
+            }
+        case EDITING_PROCESS:
+            return {
+                ...state,
+                processEditing: true,
+                selectedProcess: action.selectedProcess
+            }
+        case EDIT_SUCCESS:
+            return {
+                ...state,
+                processEditing: false,
+                selectedProcess: null,
+                editFailed: false
+            }
+        case EDIT_FAILURE:
+            return {
+                ...state,
+                processEditing: false,
+                selectedProcess: null,
+                editFailed: true
+            }
         default:
             return {...state}
     }

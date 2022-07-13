@@ -1,6 +1,7 @@
 import './App.css';
 import {useSelector} from "react-redux";
 import {Process} from "./components/Process";
+import {ToDoList} from "./components/ToDoList";
 
 function App() {
 
@@ -42,7 +43,8 @@ function App() {
             {/*<button onClick={()=> dispatch({type: GO_HOME})}>Go Home</button>*/}
             <button>Home</button>
           </div>
-          <Process/>
+            <Process/>
+            <ToDoList/>
         </>
     )
   }

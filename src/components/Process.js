@@ -1,8 +1,9 @@
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {createProcess} from "../store/reduxFunctions";
+import {createProcess, editProcess} from "../store/reduxFunctions";
 import {Button, Card, Form} from "react-bootstrap";
 import CardHeader from "react-bootstrap/CardHeader";
+import {SELECT_PROCESS_TO_EDIT} from "../store/reducer";
 // import {SELECT_DEFAULT} from "../Store/actions";
 
 export function Process() {
@@ -11,11 +12,13 @@ export function Process() {
         // token,
         processEditing,
         selectedProcess,
+        editFailed,
     } = useSelector(state => ({
         // token: state.token,
         processMessage: state.processMessage,
         processEditing: state.processEditing,
         selectedProcess: state.selectedProcess,
+        editFailed: state.editFailed,
     }))
 
     const newProcess = {
@@ -78,9 +81,9 @@ export function Process() {
         if (editState.title === "") {
             return
         }
-        // dispatch(editProcess(editState, selectedProcess[0].title))
-        // setEditState(newProcess)
-        // dispatch({type: SELECT_DEFAULT, select: true})
+        dispatch(editProcess(editState, selectedProcess[0].title))
+        setEditState(newProcess)
+        dispatch({type: SELECT_PROCESS_TO_EDIT, select: true})
     }
 
     if (processEditing) {
@@ -114,7 +117,7 @@ export function Process() {
 
             </Form>
             <Card.Footer>
-                    <div><font color="black">THIS IS A FOOTER</font></div>
+                {editFailed && <div><font color="black">ERROR: PLEASE TRY AGAIN</font></div>}
             </Card.Footer>
 
         </Card>)
