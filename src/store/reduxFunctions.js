@@ -31,14 +31,15 @@ export function getProcessList() {
         try {
             const response = await fetch("http://localhost:8080/getProcessList")
             const data = await response.json();
-            dispatch({type: GET_PROCESS_LIST, quizList: data})
+            dispatch({type: GET_PROCESS_LIST, processList: data})
         } catch (e) {
+            console.log(e)
         }
     }
 
 }
 
-export function editProcess(newProcess, title) {
+export function editProcess(processToDo, title) {
 
     // new object
     // the username for the user to update
@@ -53,9 +54,8 @@ export function editProcess(newProcess, title) {
 
 
                 },
-                body: JSON.stringify(newProcess)
+                body: JSON.stringify(processToDo)
             })
-            console.log(await response)
             if (response.ok) {
                 dispatch({type: EDIT_SUCCESS})
             } else {

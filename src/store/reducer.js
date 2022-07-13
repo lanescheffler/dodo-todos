@@ -25,6 +25,8 @@ const initState = {
     editFailed: false,
 
     selectedProcess: null,
+    selectedToDo: null,
+
     startedProcess: false,
 
     stageList: [],
@@ -67,7 +69,7 @@ export function reducer(state = initState, action) {
         case SELECT_PROCESS_TO_EDIT:
             return {
                 ...state,
-                selectedProcess: action.select
+                selectedToDo: action.select
             }
         case EDITING_PROCESS:
             return {

@@ -1,7 +1,7 @@
 import {useEffect, useRef, useState} from "react";
 import {deleteProcess, getProcessList} from "../store/reduxFunctions";
 import {useDispatch, useSelector} from "react-redux";
-import {Button} from "react-bootstrap";
+// import {Button} from "react-bootstrap";
 import {EDITING_PROCESS, SELECT_PROCESS_TO_EDIT} from "../store/reducer";
 
 // process = ToDo
@@ -13,15 +13,15 @@ export function ToDoList() {
     useEffect(() => {
         const interval = setInterval(() => {
             dispatch(getProcessList());
-        }, 1000);
+        }, 2000);
         return () => clearInterval(interval);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-    const selectedProcess = useSelector(state=>state.selectedProcess)
+    const selectedToDo = useSelector(state=>state.selectedToDo)
     const processList = useSelector(state => state.processList)
-    const [formState, setFormState] = useState({})
+    const [formState, setFormState] = useState("")
 
-    if(selectedProcess){
+    if(selectedToDo){
         dropdown.current.value = "default"
         dispatch({type: SELECT_PROCESS_TO_EDIT, select: false})
     }
@@ -47,8 +47,8 @@ export function ToDoList() {
         if (formState.processToDo === undefined || formState.processToDo === 'Please select a TODO') {
             return;
         } else {
-            const selectedToDO = processList.filter(s => s.title === formState.processToDo)
-            dispatch({type: EDITING_PROCESS, selectedToDO: selectedToDO})
+            const selectedProcess = processList.filter(s => s.title === formState.processToDo)
+            dispatch({type: EDITING_PROCESS, selectedProcess: selectedProcess})
 
         }
     }

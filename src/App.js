@@ -6,7 +6,7 @@ import {ToDoList} from "./components/ToDoList";
 function App() {
 
   const role = useSelector(state => state.role)
-  console.log("role: " + role)
+  console.log("current role state: " + role)
 
   if(role === 'home') {
     return (
@@ -44,7 +44,7 @@ function App() {
             <button>Home</button>
           </div>
             <Process/>
-            <ToDoList/>
+                <ToDoList/>
         </>
     )
   }

@@ -24,8 +24,8 @@ export function Process() {
     const newProcess = {
         title: '',
 
-        stageId: null,
-        stageList: [],
+        // stageId: null,
+        // stageList: [],
 
         toDO: true,
         started: false,
