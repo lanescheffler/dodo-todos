@@ -1,6 +1,7 @@
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {createProcess, editProcess} from "../store/reduxFunctions";
+import {createProcess, createStage, editProcess} from "../store/reduxFunctions";
+import {v4 as uuidv4} from 'uuid';
 import {Button, Card, Form} from "react-bootstrap";
 import CardHeader from "react-bootstrap/CardHeader";
 import {SELECT_PROCESS_TO_EDIT} from "../store/reducer";
@@ -15,7 +16,7 @@ export function Process() {
         editFailed,
     } = useSelector(state => ({
         // token: state.token,
-        processMessage: state.processMessage,
+        // processMessage: state.processMessage,
         processEditing: state.processEditing,
         selectedProcess: state.selectedProcess,
         editFailed: state.editFailed,
@@ -23,20 +24,35 @@ export function Process() {
 
     const newProcess = {
         title: '',
-
-        // stageId: null,
+        // stageTitle: 'Stage 1',
+        //
+        // stageId: stageId,
         // stageList: [],
 
-        toDO: true,
+        toDo: true,
         started: false,
-
         finished: false
+    }
+
+    const newStage = {
+        promptu: 'Stage 1',
+        stageId: uuidv4,
+        processId: newProcess.title.toString(),
+
+        orderNumber: null,
+        pending: true,
+        done: false,
+
+        comments: 'please enter comments',
+
     }
 
     // const dropdown = useRef()
 
     const [formState, setFormState] = useState(newProcess)
     const [editState, setEditState] = useState(newProcess)
+    const [stageState, setStageState] = useState(newStage)
+    const [editStageState, setEditStageState] = useState(newStage)
 
     const dispatch = useDispatch();
 
@@ -74,7 +90,10 @@ export function Process() {
             return
         }
         dispatch(createProcess({formState: formState, newProcess}))
+        dispatch(createStage({stageState: stageState, newStage}))
+            //this will dispatch action to set stageId within process to processId within stage.
         setFormState(newProcess)
+        setStageState(newStage)
     }
 
     function onEditSubmit(e) {

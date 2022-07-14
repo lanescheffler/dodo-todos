@@ -10,6 +10,7 @@
 import {EDIT_FAILURE, EDIT_SUCCESS, GET_PROCESS_LIST} from "./reducer";
 
 export function createProcess(newProcess) {
+    console.log(newProcess.formState)
     return async function sideEffect() {
         try {
             await fetch("http://localhost:8080/createProcess", {
@@ -19,6 +20,25 @@ export function createProcess(newProcess) {
                     'Content-Type': 'application/json' //defining what we are sending
                 },
                 body: JSON.stringify(newProcess.formState)
+            })
+        } catch (e) {
+            console.log(e)
+        }
+    }
+}
+
+export function createStage(newStage) {
+    console.log(newStage.stageState)
+    //getting 401 error on second submit because the information ie processId needs to change/be updated
+    return async function sideEffect() {
+        try {
+            await fetch("http://localhost:8080/createStage", {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json', // willing to accept
+                    'Content-Type': 'application/json' //defining what we are sending
+                },
+                body: JSON.stringify(newStage.stageState)
             })
         } catch (e) {
             console.log(e)
@@ -90,4 +110,12 @@ export function deleteProcess(process) {
             console.log(e)
         }
     }
+}
+
+export function startProcess() {
+
+}
+
+export function cancelProcess() {
+
 }
