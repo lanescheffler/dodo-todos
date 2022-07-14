@@ -36,7 +36,7 @@ export function Process() {
 
     const newStage = {
         promptu: 'Stage 1',
-        stageId: uuidv4,
+        stageId: new Date().getMilliseconds(),
         processId: newProcess.title.toString(),
 
         orderNumber: null,
@@ -80,6 +80,10 @@ export function Process() {
             setFormState({
                 ...formState,
                 title: e.target.value
+            })
+            setStageState({
+                ...stageState,
+                processId: e.target.value
             })
         }
     }
