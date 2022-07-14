@@ -2,10 +2,12 @@ import './App.css';
 import {useSelector} from "react-redux";
 import {Process} from "./components/Process";
 import {ToDoList} from "./components/ToDoList";
+import {ToDo} from "./components/ToDo";
 
 function App() {
 
-  const role = useSelector(state => state.role)
+    const role = useSelector(state => state.role)
+    const toDo = useSelector(state => state.toDo)
   console.log("current role state: " + role)
 
   if(role === 'home') {
@@ -39,7 +41,7 @@ function App() {
     return (
         <>
           <div style={{backgroundColor: 'grey'}}><h1>Editor</h1></div>
-          <div style={{display: 'flex', justifyContent: "space-evenly", position: "absolute", top: 10, right: 0}}>
+          <div style={{display: 'flex', justifyContent: "space-evenly", position: "absolute", top: 5, right: 10}}>
             {/*<button onClick={()=> dispatch({type: GO_HOME})}>Go Home</button>*/}
             <button>Home</button>
           </div>
