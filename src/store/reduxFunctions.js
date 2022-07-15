@@ -29,6 +29,7 @@ export function createProcess(newProcess) {
 
 export function createStage(newStage) {
     console.log(newStage.stageState)
+    console.log(newStage)
     //getting 401 error on second submit because the information ie processId needs to change/be updated
     return async function sideEffect() {
         try {

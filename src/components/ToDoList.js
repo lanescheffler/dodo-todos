@@ -1,5 +1,5 @@
 import {useEffect, useRef, useState} from "react";
-import {deleteProcess, getProcessList} from "../store/reduxFunctions";
+import {createStage, deleteProcess, getProcessList} from "../store/reduxFunctions";
 import {useDispatch, useSelector} from "react-redux";
 // import {Button} from "react-bootstrap";
 import {EDITING_PROCESS, ON_SELECTED_TODO, SELECT_PROCESS_TO_EDIT, TO_DO} from "../store/reducer";
@@ -25,8 +25,21 @@ export function ToDoList() {
     const toDoOption = useSelector(state => state.toDoOption)
     const toDo = useSelector(state => state.toDo)
 
+    const newStage = {
+        promptu: 'Stage 1',
+        stageId: new Date().getMilliseconds(),
+        processId: toDo[0].title.toString(),
+
+        orderNumber: null,
+        pending: true,
+        done: false,
+
+        comments: 'please enter comments',
+
+    }
 
     const [formState, setFormState] = useState("")
+    const [stageState, setStageState] = useState(newStage)
 
     if (selectedToDo) {
         dropdown.current.value = "default"
@@ -191,7 +204,9 @@ export function ToDoList() {
                     </span>
                     {/*this will be where the multiple choice is for 'todo' or 'started' or 'done'*/}
                     <div style={{display: 'flex', justifyContent: "space-evenly", position: "absolute", top: 10, right: 10}}>
-                        <button>ADD STAGE:</button>
+                        <button onClick={(e) =>
+                        {dispatch(createStage({stageState: stageState, newStage}))}}>ADD STAGE
+                        </button>
                     </div>
 
                 </Card>
