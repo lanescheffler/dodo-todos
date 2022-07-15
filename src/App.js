@@ -4,6 +4,7 @@ import {Process} from "./components/Process";
 import {ToDoList} from "./components/ToDoList";
 import {Stage} from "./components/Stage";
 import {StepList} from "./components/StepList";
+import {ToDo} from "./components/ToDo";
 
 function App() {
 
@@ -61,6 +62,7 @@ function App() {
                 </div>
                 <Process/>
                 <ToDoList/>
+                <ToDo/>
                 <StepList/>
             </>
         )
