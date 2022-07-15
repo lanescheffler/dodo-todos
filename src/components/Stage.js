@@ -114,6 +114,7 @@ export function Stage() {
                 </span>
                     </form>
                 </div>
+
                 <StepList/>
             </>
         )

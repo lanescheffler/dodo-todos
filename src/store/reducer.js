@@ -26,6 +26,7 @@ const initState = {
     processMessage: "",
     processEditing: false,
     processToDo: false,
+    stageToDo: false,
     editFailed: false,
 
     selectedProcess: null,
@@ -37,9 +38,13 @@ const initState = {
 
     stageList: [],
     stageMessage: "",
-    stageEditing: false,
+    // stageEditing: false,
+    stageEditing: true,
 
-    selectedStage: null
+    selectedStage: null,
+    selectedStep: null,
+    step: null,
+    stepOption: null
 
 }
 

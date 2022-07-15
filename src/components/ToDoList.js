@@ -111,26 +111,26 @@ export function ToDoList() {
                         )}}
                     </select>
                     <span className={'ml-2'}>
-                    <button onClick={(e) => {
-                        editProcess()
-                    }} className={'m-2'} size={'sm'}>
-                        Edit
-                    </button>
-                </span>
-                    <span className={'ml-2'}>
-                    <button onClick={(e) => {
-                        dltProcess()
-                    }} className={'m-2'} size={'sm'}>
-                        Delete
-                    </button>
-                </span>
-                    <span className={'ml-2'}>
-                    <button onClick={(e) => {
-                        selectProcess()
-                    }} className={'m-2'} size={'sm'}>
-                        Select
-                    </button>
-                </span>
+                        <button onClick={(e) => {
+                            editProcess()
+                        }} className={'m-2'} size={'sm'}>
+                            Edit
+                        </button>
+                    </span>
+                        <span className={'ml-2'}>
+                        <button onClick={(e) => {
+                            dltProcess()
+                        }} className={'m-2'} size={'sm'}>
+                            Delete
+                        </button>
+                    </span>
+                        <span className={'ml-2'}>
+                        <button onClick={(e) => {
+                            selectProcess()
+                        }} className={'m-2'} size={'sm'}>
+                            Select
+                        </button>
+                    </span>
                 </form>
 
                 {/*<div>*/}
@@ -154,6 +154,8 @@ export function ToDoList() {
             </div>
         )
     }
+
+    // pretty sure this doesnt need to be here - duplicate
 
     if (toDo) {
         return (<div>
