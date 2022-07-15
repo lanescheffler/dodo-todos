@@ -2,6 +2,7 @@ export const ON_LOGIN_EDITOR = 'reducer/ON_LOGIN_EDITOR';
 export const ON_LOGIN_FOLLOWER = 'reducer/ON_LOGIN_EDITOR';
 
 export const GET_PROCESS_LIST = 'GET_PROCESS_LIST';
+export const GET_STAGE_LIST = 'GET_STAGE_LIST';
 export const ON_SELECTED_TODO = 'ON_SELECTED_TODO';
 export const TO_DO = 'TO_DO';
 
@@ -61,6 +62,11 @@ export function reducer(state = initState, action) {
                 ...state,
                 processList: action.processList
             }
+        case GET_STAGE_LIST:
+            return {
+                ...state,
+                stageList: action.stageList
+            }
         // case ON_PROCESS_ADD:
         //     if (action.processInfo.title === '') {
         //         alert('please enter a title...')
@@ -108,6 +114,7 @@ export function reducer(state = initState, action) {
                 selectedProcess: null,
                 editFailed: true
             }
+
         default:
             return {...state}
     }

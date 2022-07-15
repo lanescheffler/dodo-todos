@@ -2,8 +2,6 @@ import './App.css';
 import {useSelector} from "react-redux";
 import {Process} from "./components/Process";
 import {ToDoList} from "./components/ToDoList";
-// import {ToDo} from "./components/ToDo";
-// import {StepList} from "./components/StepList";
 import {Stage} from "./components/Stage";
 import {StepList} from "./components/StepList";
 
@@ -40,7 +38,20 @@ function App() {
             </div>
         )
     }
-    if (role === 'editor') {
+    if (role === 'editor' && !toDo) {
+        return (
+            <>
+                <div style={{backgroundColor: 'grey'}}><h1>Editor</h1></div>
+                <div style={{display: 'flex', justifyContent: "space-evenly", position: "absolute", top: 5, right: 10}}>
+                    {/*<button onClick={()=> dispatch({type: GO_HOME})}>Go Home</button>*/}
+                    <button>Home</button>
+                </div>
+                <Process/>
+                <ToDoList/>
+            </>
+        )
+    }
+    if (role === 'editor' && toDo) {
         return (
             <>
                 <div style={{backgroundColor: 'grey'}}><h1>Editor</h1></div>

@@ -7,7 +7,7 @@
 //
 // } from "./reducer"
 
-import {EDIT_FAILURE, EDIT_SUCCESS, GET_PROCESS_LIST} from "./reducer";
+import {EDIT_FAILURE, EDIT_SUCCESS, GET_PROCESS_LIST, GET_STAGE_LIST} from "./reducer";
 
 export function createProcess(newProcess) {
     console.log(newProcess.formState)
@@ -52,6 +52,19 @@ export function getProcessList() {
             const response = await fetch("http://localhost:8080/getProcessList")
             const data = await response.json();
             dispatch({type: GET_PROCESS_LIST, processList: data})
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+}
+
+export function getStageList() {
+    return async function sideEffect(dispatch) {
+        try {
+            const response = await fetch("http://localhost:8080/getStageList")
+            const data = await response.json();
+            dispatch({type: GET_STAGE_LIST, stageList: data})
         } catch (e) {
             console.log(e)
         }

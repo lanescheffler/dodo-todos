@@ -8,6 +8,7 @@ export function Stage() {
 
     const dispatch = useDispatch()
     const dropdown = useRef();
+
     useEffect(() => {
         const interval = setInterval(() => {
             dispatch(getProcessList());
@@ -65,14 +66,6 @@ export function Stage() {
                         selectProcess()
                     }} className={'m-2'} size={'sm'}>
                         Select
-                    </button>
-                </span>
-
-                        <span className={'ml-2'}>
-                    <button onClick={(e) => {
-                        startProcess()
-                    }} className={'m-2'} size={'sm'}>
-                        START
                     </button>
                 </span>
                     </form>
