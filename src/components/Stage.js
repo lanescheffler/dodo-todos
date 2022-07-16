@@ -1,8 +1,8 @@
 import {StepList} from "./StepList";
 import {useDispatch, useSelector} from "react-redux";
-import {TO_DO} from "../store/reducer";
+import {STEP, TO_DO} from "../store/reducer";
 import {useEffect, useRef, useState} from "react";
-import {cancelProcess, getProcessList, startProcess} from "../store/reduxFunctions";
+import {cancelProcess, getProcessList, getStageList, startProcess} from "../store/reduxFunctions";
 
 export function Stage() {
 
@@ -12,6 +12,7 @@ export function Stage() {
     useEffect(() => {
         const interval = setInterval(() => {
             dispatch(getProcessList());
+            dispatch(getStageList());
         }, 1000);
         return () => clearInterval(interval);
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -20,6 +21,8 @@ export function Stage() {
     const processList = useSelector(state => state.processList)
     const currentProcess = useSelector(state => state.toDo)
     const filteredProcessList = processList.filter(td => td.todo = currentProcess)
+    const stageList = useSelector(state =>state.stageList)
+
 
     const [formState, setFormState] = useState("")
 
@@ -40,7 +43,9 @@ export function Stage() {
             return;
         } else {
             const toDo = processList.filter(s => s.title === formState.processToDo)
+            const selectedStage = stageList
             dispatch({type: TO_DO, toDo: toDo})
+            dispatch({type: STEP, selectedStage: selectedStage})
             // dropdown.current.value = "default"
         }
     }
@@ -114,7 +119,6 @@ export function Stage() {
                 </span>
                     </form>
                 </div>
-
                 <StepList/>
             </>
         )

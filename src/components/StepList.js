@@ -9,27 +9,56 @@ export function StepList() {
 
     // getStageList function
 
+
+
     const dispatch = useDispatch()
     useEffect(() => {
         const interval = setInterval(() => {
             dispatch(getStageList());
-        }, 1000);
+        }, 5000);
         return () => clearInterval(interval);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+    const stageEditing = useSelector(state => state.stageEditing)
+
     const toDo = useSelector(state => state.toDo[0].title)
     const stageList = useSelector(state =>state.stageList)
+    const filteredStageList = stageList.filter(steps => steps.processId === toDo)
 
-    const filteredStageList = stageList.filter(step => step.processId === toDo)
+    const stepOption = useSelector(state => state.selectedStage[0].id)
+    const selectedStep = filteredStageList.filter(step => step.id === stepOption)
 
+
+    if(stageEditing) {
+        return (
+            <>
+                <div className={'row'}>
+                    <Col>
+                        <Card className={'m-2 col p-2'}>
+                            <CardHeader className={'h2 text-center'}>STEPS</CardHeader>
+                            <div className={'steps'}>
+
+                                {
+                                    selectedStep.map((stepData, idx) => {
+                                        return <div key={"steps" + idx} className={'selectedStep'}>
+                                            <Step stepData={stepData}/>
+                                        </div>
+                                    })
+                                }
+                            </div>
+                        </Card>
+                    </Col>
+                </div>
+            </>
+        )
+    }
 
     return <>
-
         <div className={'row'}>
             <Col>
                 <Card className={'m-2 col p-2'}>
-                    <CardHeader className={'h2 text-center'}>STEPS</CardHeader>
+                    <CardHeader className={'h2 text-center'}>to "{toDo}" takes steps...</CardHeader>
                     <div className={'steps'}>
 
                         {

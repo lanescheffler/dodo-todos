@@ -7,7 +7,14 @@
 //
 // } from "./reducer"
 
-import {EDIT_FAILURE, EDIT_SUCCESS, GET_PROCESS_LIST, GET_STAGE_LIST} from "./reducer";
+import {
+    EDIT_FAILURE,
+    EDIT_SUCCESS,
+    GET_PROCESS_LIST,
+    GET_STAGE_LIST,
+    STAGE_EDIT_FAILURE,
+    STAGE_EDIT_SUCCESS
+} from "./reducer";
 
 export function createProcess(newProcess) {
     console.log(newProcess.formState)
@@ -99,6 +106,38 @@ export function editProcess(processToDo, title) {
                 }, 3000)
             }
             dispatch(getProcessList())
+        } catch (e) {
+            console.log(e)
+        }
+    }
+}
+
+export function editStage(stepToDo, id) {
+
+    // new object
+    // the username for the user to update
+    return async function sideEffect(dispatch) {
+        try {
+            const response = await fetch(`http://localhost:8080/editStage/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Accept': 'application/json', // willing to accept
+                    'Content-Type': 'application/json', //defining what we are sending
+                    "Access-Control-Allow-Origin": "*"
+
+
+                },
+                body: JSON.stringify(stepToDo)
+            })
+            if (response.ok) {
+                dispatch({type: STAGE_EDIT_SUCCESS})
+            } else {
+                dispatch({type: STAGE_EDIT_FAILURE})
+                setTimeout(() => {
+                    dispatch({type: STAGE_EDIT_SUCCESS})
+                }, 3000)
+            }
+            dispatch(getStageList())
         } catch (e) {
             console.log(e)
         }

@@ -1,8 +1,8 @@
 import {useEffect, useRef, useState} from "react";
-import {createStage, deleteProcess, getProcessList} from "../store/reduxFunctions";
+import {createStage, deleteProcess, getProcessList, getStageList} from "../store/reduxFunctions";
 import {useDispatch, useSelector} from "react-redux";
 // import {Button} from "react-bootstrap";
-import {EDITING_PROCESS, ON_SELECTED_TODO, SELECT_PROCESS_TO_EDIT, TO_DO} from "../store/reducer";
+import {EDITING_PROCESS, ON_SELECTED_TODO, SELECT_PROCESS_TO_EDIT, STEP, TO_DO} from "../store/reducer";
 import {ToDo} from "./ToDo";
 import {Card} from "react-bootstrap";
 
@@ -15,6 +15,7 @@ export function ToDoList() {
     useEffect(() => {
         const interval = setInterval(() => {
             dispatch(getProcessList());
+            dispatch(getStageList());
         }, 1000);
         return () => clearInterval(interval);
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -24,6 +25,10 @@ export function ToDoList() {
     const selectedToDo = useSelector(state => state.selectedToDo)
     const toDoOption = useSelector(state => state.toDoOption)
     const toDo = useSelector(state => state.toDo)
+
+    let {selectedStage} = useSelector(state => ({selectedStage: state.selectedStage}))
+    const stageList = useSelector(state =>state.stageList)
+
 
     // const newStage = {
     //     promptu: 'Stage 1',
@@ -91,7 +96,9 @@ export function ToDoList() {
             return;
         } else {
             const toDo = processList.filter(s => s.title === formState.processToDo)
+            const selectedStage = stageList
             dispatch({type: TO_DO, toDo: toDo})
+            dispatch({type: STEP, selectedStage: selectedStage})
             dropdown.current.value = "default"
         }
     }

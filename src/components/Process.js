@@ -52,7 +52,6 @@ export function Process() {
     const [formState, setFormState] = useState(newProcess)
     const [editState, setEditState] = useState(newProcess)
     const [stageState, setStageState] = useState(newStage)
-    const [editStageState, setEditStageState] = useState(newStage)
 
     const dispatch = useDispatch();
 
