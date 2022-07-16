@@ -21,7 +21,7 @@
     align-items: center;
     justify-content: center;
     font-size: calc(10px + 5vmin);
-    font-family: "Arial Black";
+    /*font-family: "Arial Black";*/
     color: brown;
 }
 
@@ -29,6 +29,13 @@
     color: black;
     align-items: center;
     font-size: calc(10px + 2vmin);
+}
+
+.homeButtons {
+    color: linen;
+    font-size: calc(15px);
+    border: transparent;
+    background-color: brown;
 }
 
 @keyframes App-logo-spin {

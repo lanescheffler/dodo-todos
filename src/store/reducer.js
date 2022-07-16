@@ -1,5 +1,6 @@
-export const ON_LOGIN_EDITOR = 'reducer/ON_LOGIN_EDITOR';
-export const ON_LOGIN_FOLLOWER = 'reducer/ON_LOGIN_EDITOR';
+export const EDITOR = 'reducer/EDITOR';
+export const FOLLOWER = 'reducer/EDITOR';
+export const LOGIN = 'LOGIN';
 
 export const GET_PROCESS_LIST = 'GET_PROCESS_LIST';
 export const GET_STAGE_LIST = 'GET_STAGE_LIST';
@@ -25,9 +26,9 @@ const initState = {
     isEditor: false,
     isFollower: false,
     // role: null,
-    // role: 'home',
+    role: 'home',
     // role: 'editor',
-    role: 'follower',
+    // role: 'follower',
 
     token: null,
 
@@ -58,18 +59,23 @@ const initState = {
 
 export function reducer(state = initState, action) {
     switch (action?.type) {
-        case ON_LOGIN_EDITOR:
+        case LOGIN:
             return {
                 ...state,
-                isEditor: true,
-                role: "editor"
+                role: action.role
             }
-        case ON_LOGIN_FOLLOWER:
-            return {
-                ...state,
-                isFollower: true,
-                role: "follower"
-            }
+        // case EDITOR:
+        //     return {
+        //         ...state,
+        //         isEditor: true,
+        //         role: "editor"
+        //     }
+        // case FOLLOWER:
+        //     return {
+        //         ...state,
+        //         isFollower: true,
+        //         role: "follower"
+        //     }
         case GET_PROCESS_LIST:
             return {
                 ...state,

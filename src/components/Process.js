@@ -139,8 +139,8 @@ export function Process() {
             </CardHeader>
             <Form className={'p-3'} onSubmit={addProcess} style={{backgroundColor: 'grey'}}>
                 <Form.Group className={'mb-3'}>
-                    <Form.Label>TITLE: </Form.Label>
-                    <input onChange={updateTitle} value={formState.title} placeholder="title" type='text'/>
+                    <Form.Label>I NEED TO... </Form.Label>
+                    <input onChange={updateTitle} value={formState.title} placeholder="build a website" type='text'/>
                     <button type='submit'>Submit</button>
                 </Form.Group>
             </Form>
