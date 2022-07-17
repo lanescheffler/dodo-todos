@@ -76,7 +76,7 @@ export function Stage() {
             const processToStart = processList.filter(s => s.title === formState.processToDo)
             const processStarted = processToStart[0].title
             console.log(processStarted)
-            dispatch(addUser(name, processStarted))
+            dispatch(addUser(name.name, {processStarted}))
             // dispatch(initStartProcess({name}))
         }
     }

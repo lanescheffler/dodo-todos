@@ -165,13 +165,13 @@ export function deleteProcess(process) {
     }
 }
 
-export function addUser(userInfor) {
+export function addUser(name, processStarted) {
     return async function sideEffect(dispatch) {
         try {
-            const response = await fetch(`http://localhost:8080/addUser?name=${userInfor.name}&processStarted=${userInfor.processStarted}`)
+            const response = await fetch(`http://localhost:8080/addUser?name=${name}&processStarted=${processStarted.processStarted}`)
             if (response.ok) {
-                const name = userInfor.name
-                const processStarted = userInfor.processStarted
+                // const name = userInfor.name
+                // const processStarted = userInfor.processStarted
                 dispatch({type: ON_ADD_USER, userInfor: {name: name, processStarted: processStarted}});
             }
         } catch(e) {
