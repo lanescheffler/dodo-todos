@@ -1,6 +1,7 @@
 export const EDITOR = 'reducer/EDITOR';
 export const FOLLOWER = 'reducer/EDITOR';
 export const LOGIN = 'LOGIN';
+export const ON_ADD_USER = 'ON_ADD_USER';
 
 export const GET_PROCESS_LIST = 'GET_PROCESS_LIST';
 export const GET_STAGE_LIST = 'GET_STAGE_LIST';
@@ -25,12 +26,11 @@ const initState = {
 
     isEditor: false,
     isFollower: false,
-    // role: null,
     role: 'home',
-    // role: 'editor',
-    // role: 'follower',
 
     token: null,
+    userList: [],
+    startMessage: "",
 
     processList: [],
     processMessage: "",
@@ -76,6 +76,11 @@ export function reducer(state = initState, action) {
         //         isFollower: true,
         //         role: "follower"
         //     }
+        case ON_ADD_USER:
+            return {
+                ...state,
+                userList: [...state.userList, action.userInfor],
+            }
         case GET_PROCESS_LIST:
             return {
                 ...state,

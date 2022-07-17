@@ -15,7 +15,7 @@ export function ToDo() {
     }, [])
 
     let newStage = {
-        promptu: 'Stage 1',
+        promptu: 'promptu',
         stageId: new Date().getMilliseconds(),
         processId: toDo[0].title.toString(),
 
@@ -47,7 +47,7 @@ export function ToDo() {
                     <button onClick={(e) => {
                         dispatch(createStage({stageState: stageState, newStage}))
                         setStageState(newStage)
-                    }}>ADD STAGE
+                    }}>ADD STEP
                     </button>
                 </div>
 

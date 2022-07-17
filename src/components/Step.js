@@ -19,7 +19,7 @@ export function Step({stepData}) {
     }))
 
     const newStage = {
-        promptu: 'Stage 1',
+        promptu: 'promptu',
         stageId: new Date().getMilliseconds(),
 
         orderNumber: null,
@@ -29,15 +29,17 @@ export function Step({stepData}) {
         comments: 'please enter comments',
     }
 
+    // const follower = useSelector(state => state.isFollower)
+    // const editor = useSelector(state => state.isEditor)
+    const role = useSelector(state => state.role)
+
     const dispatch = useDispatch();
     const dropdown = useRef();
     const stageList = useSelector(state => state.stageList)
     const selectedStep = useSelector(state => state.selectedStep)
     const stepOption = useSelector(state => state.stepOption)
-    // const follower = useSelector(state => state.isFollower)
-    // const editor = useSelector(state => state.isEditor)
-    const role = useSelector(state => state.role)
 
+    const startedProcess = useSelector(state => state.startedProcess)
 
     const [formState, setFormState] = useState(newStage)
     const [editState, setEditState] = useState(newStage)
@@ -98,27 +100,35 @@ export function Step({stepData}) {
 
                         step #{stepData.orderNumber} : "{stepData.promptu}" is...
 
-                        <FormLabel className={''}>
-                          Pending: <input type={'checkbox'} className={'m-1'}/>
-                        </FormLabel>
+                        <span> pending: {stepData.pending.toString()}</span> |
+                        <span> done: {stepData.done.toString()}</span>
 
-                        <FormLabel className={''}>
-                          Done: <input type={'checkbox'} className={'m-1'}/>  |
-                        </FormLabel>
+                        {/*<FormLabel className={''}>*/}
+                        {/*  Pending: <input type={'checkbox'} className={'m-1'}/>*/}
+                        {/*</FormLabel>*/}
+
+                        {/*<FormLabel className={''}>*/}
+                        {/*  Done: <input type={'checkbox'} className={'m-1'}/>  |*/}
+                        {/*</FormLabel>*/}
 
                         <FormLabel classname={''}>
                             {/*| comments:  <input type={'text'}/> [{stepData.comments}]*/}
                             | comments: [{stepData.comments}]
                         </FormLabel>
 
-                        <span> pending: {stepData.pending.toString()}</span> |
-                    <span> done: {stepData.done.toString()}</span>
-
                     </span>
                 </Card>
 
             </>
         )
+    }
+
+    if (role === 'follower' && startedProcess) {
+        return <>
+
+            please complete the steps
+
+        </>
     }
 
     if (stageEditing) {

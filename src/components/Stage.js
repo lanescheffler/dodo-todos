@@ -2,7 +2,7 @@ import {StepList} from "./StepList";
 import {useDispatch, useSelector} from "react-redux";
 import {STEP, TO_DO} from "../store/reducer";
 import {useEffect, useRef, useState} from "react";
-import {cancelProcess, getProcessList, getStageList, startProcess} from "../store/reduxFunctions";
+import {addUser, getProcessList, getStageList, initCancelProcess} from "../store/reduxFunctions";
 
 export function Stage() {
 
@@ -21,13 +21,31 @@ export function Stage() {
     const processList = useSelector(state => state.processList)
     const currentProcess = useSelector(state => state.toDo)
     const filteredProcessList = processList.filter(td => td.todo = currentProcess)
-    const stageList = useSelector(state =>state.stageList)
+    const stageList = useSelector(state => state.stageList)
+
+    const role = useSelector(state => state.role)
 
 
     const [formState, setFormState] = useState("")
+    const [name, setName] = useState("")
+    const [processStarted, setProcessStarted] = useState("")
+
+    const processToStart = processList.filter(s => s.title === formState.processToDo)
+
 
     function handleForm(e) {
         e.preventDefault();
+    }
+
+    function updateName(e) {
+        setName({
+            ...name,
+            name: e.target.value
+        })
+        setProcessStarted({
+            ...processStarted,
+            processStarted: processToStart[0].title
+        })
     }
 
     function onChangeProcess(e) {
@@ -47,6 +65,19 @@ export function Stage() {
             dispatch({type: TO_DO, toDo: toDo})
             dispatch({type: STEP, selectedStage: selectedStage})
             // dropdown.current.value = "default"
+        }
+    }
+
+    function startProcess(e) {
+        e.preventDefault()
+        if (role !== 'follower') {
+            return;
+        } else {
+            const processToStart = processList.filter(s => s.title === formState.processToDo)
+            const processStarted = processToStart[0].title
+            console.log(processStarted)
+            dispatch(addUser(name, processStarted))
+            // dispatch(initStartProcess({name}))
         }
     }
 
@@ -95,28 +126,25 @@ export function Stage() {
                         </select>
 
                         <span className={'ml-2'}>
-                    <button onClick={(e) => {
-                        selectProcess()
-                    }} className={'m-2'} size={'sm'}>
-                        Select
-                    </button>
-                </span>
+                            <button onClick={(e) => {
+                                selectProcess()
+                            }} className={'m-2'} size={'sm'}>
+                                Select
+                            </button>
+                        </span>
+                    </form>
+                    <form onSubmit={startProcess}>
+                        <input onChange={updateName} value={name.name} placeholder="please enter your name" type='text'/>
+
+                        <button type='submit'>START</button>
 
                         <span className={'ml-2'}>
-                    <button onClick={(e) => {
-                        startProcess()
-                    }} className={'m-2'} size={'sm'}>
-                        START
-                    </button>
-                </span>
-
-                        <span className={'ml-2'}>
-                    <button onClick={(e) => {
-                        cancelProcess()
-                    }} className={'m-2'} size={'sm'}>
-                        CANCEL
-                    </button>
-                </span>
+                            <button onClick={(e) => {
+                                initCancelProcess(e)
+                            }} className={'m-2'} size={'sm'}>
+                                CANCEL
+                            </button>
+                        </span>
                     </form>
                 </div>
                 <StepList/>

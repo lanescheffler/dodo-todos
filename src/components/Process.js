@@ -35,7 +35,7 @@ export function Process() {
     }
 
     const newStage = {
-        promptu: 'Stage 1',
+        promptu: 'promptu',
         stageId: new Date().getMilliseconds(),
         processId: newProcess.title.toString(),
 

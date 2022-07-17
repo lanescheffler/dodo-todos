@@ -11,7 +11,7 @@ import {
     EDIT_FAILURE,
     EDIT_SUCCESS,
     GET_PROCESS_LIST,
-    GET_STAGE_LIST,
+    GET_STAGE_LIST, ON_ADD_USER,
     STAGE_EDIT_FAILURE,
     STAGE_EDIT_SUCCESS
 } from "./reducer";
@@ -165,10 +165,24 @@ export function deleteProcess(process) {
     }
 }
 
-export function startProcess() {
-
+export function addUser(userInfor) {
+    return async function sideEffect(dispatch) {
+        try {
+            const response = await fetch(`http://localhost:8080/addUser?name=${userInfor.name}&processStarted=${userInfor.processStarted}`)
+            if (response.ok) {
+                const name = userInfor.name
+                const processStarted = userInfor.processStarted
+                dispatch({type: ON_ADD_USER, userInfor: {name: name, processStarted: processStarted}});
+            }
+        } catch(e) {
+            console.log(e)
+        }
+    }
 }
 
-export function cancelProcess() {
+
+
+
+export function initCancelProcess() {
 
 }
