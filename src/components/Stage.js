@@ -64,13 +64,13 @@ export function Stage() {
             const selectedStage = stageList
             dispatch({type: TO_DO, toDo: toDo})
             dispatch({type: STEP, selectedStage: selectedStage})
-            // dropdown.current.value = "default"
+            dropdown.current.value = "default"
         }
     }
 
     function startProcess(e) {
         e.preventDefault()
-        if (role !== 'follower') {
+        if (role !== 'follower' || name === '') {
             return;
         } else {
             const processToStart = processList.filter(s => s.title === formState.processToDo)

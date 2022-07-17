@@ -165,6 +165,27 @@ export function deleteProcess(process) {
     }
 }
 
+export function deleteStage(id) {
+    return async function sideEffect(dispatch) {
+        try {
+            const response = await fetch(`http://localhost:8080/deleteStage/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    "Access-Control-Allow-Origin": "*"
+                },
+            })
+            if (response.ok)
+                console.log("delete successful")
+            else {
+                console.log("delete not successful")
+            }
+            dispatch(getStageList())
+        } catch (e) {
+            console.log(e)
+        }
+    }
+}
+
 export function addUser(name, processStarted) {
     return async function sideEffect(dispatch) {
         try {

@@ -27,7 +27,7 @@ export function ToDoList() {
     const toDo = useSelector(state => state.toDo)
 
     let {selectedStage} = useSelector(state => ({selectedStage: state.selectedStage}))
-    const stageList = useSelector(state =>state.stageList)
+    const stageList = useSelector(state => state.stageList)
 
 
     // const newStage = {
@@ -84,7 +84,7 @@ export function ToDoList() {
     function dltProcess() {
         if (formState.processToDo === undefined || formState.processToDo === 'Please select a TODO') {
             return;
-        } else{
+        } else {
             dispatch(deleteProcess(formState))
             dropdown.current.value = "default"
         }
@@ -103,69 +103,8 @@ export function ToDoList() {
         }
     }
 
-    if (!toDo) {
-        return (
-            <div>
-                <div><font color="black"><h2>TODO List</h2></font></div>
-                <form onSubmit={handleForm}>
-                    <select ref={dropdown} onChange={onChangeProcess}>
-                        <option value="default">Please select a TODO</option>
-                        {processList.map((processToDo, idx) => {
-                                return <option key={idx} value={processToDo.title}>
-                                    {processToDo.title}
-                                </option>
-                            }
-                        )}}
-                    </select>
-                    <span className={'ml-2'}>
-                        <button onClick={(e) => {
-                            editProcess()
-                        }} className={'m-2'} size={'sm'}>
-                            Edit
-                        </button>
-                    </span>
-                        <span className={'ml-2'}>
-                        <button onClick={(e) => {
-                            dltProcess()
-                        }} className={'m-2'} size={'sm'}>
-                            Delete
-                        </button>
-                    </span>
-                        <span className={'ml-2'}>
-                        <button onClick={(e) => {
-                            selectProcess()
-                        }} className={'m-2'} size={'sm'}>
-                            Select
-                        </button>
-                    </span>
-                </form>
-
-                {/*<div>*/}
-                {/*    <Card style={{backgroundColor: 'grey', color: 'white'}}*/}
-                {/*          className={'d-flex w-80 p-3 m-auto'}*/}
-                {/*          border={'black'}>*/}
-
-                {/*    <span>*/}
-                {/*        PROCESS:*/}
-                {/*        /!*Process: [{toDo[0].title}] || STATUS:*!/*/}
-                {/*    </span>*/}
-                {/*        <span>*/}
-                {/*        IS FINISHED:*/}
-                {/*            /!*IS FINISHED: {toDo[0].finished.toString()}*!/*/}
-                {/*    </span>*/}
-                {/*        /!*this will be where the multiple choice is for 'todo' or 'started' or 'done'*!/*/}
-
-                {/*    </Card>*/}
-
-                {/*</div>*/}
-            </div>
-        )
-    }
-
-    // pretty sure this doesnt need to be here - duplicate
-
-    if (toDo) {
-        return (<div>
+    return <>
+        <div>
             <div><font color="black"><h2>TODO List</h2></font></div>
             <form onSubmit={handleForm}>
                 <select ref={dropdown} onChange={onChangeProcess}>
@@ -200,28 +139,6 @@ export function ToDoList() {
                 </span>
             </form>
 
-            {/*<div>*/}
-            {/*    <Card style={{backgroundColor: 'grey', color: 'white'}}*/}
-            {/*          className={'d-flex w-80 p-3 m-auto'}*/}
-            {/*          border={'black'}>*/}
-
-            {/*        <span>*/}
-            {/*            PROCESS: [{toDo[0].title}] || STATUS:*/}
-            {/*        </span>*/}
-            {/*        <span>*/}
-            {/*            IS FINISHED: {toDo[0].finished.toString()}*/}
-            {/*        </span>*/}
-            {/*        /!*this will be where the multiple choice is for 'todo' or 'started' or 'done'*!/*/}
-            {/*        <div style={{display: 'flex', justifyContent: "space-evenly", position: "absolute", top: 10, right: 10}}>*/}
-            {/*            <button onClick={(e) =>*/}
-            {/*            {dispatch(createStage({stageState: stageState, newStage}))}}>ADD STAGE*/}
-            {/*            </button>*/}
-            {/*        </div>*/}
-
-            {/*    </Card>*/}
-
-            {/*</div>*/}
-
-        </div>)
-    }
+        </div>
+    </>
 }

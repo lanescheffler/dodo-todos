@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
-import {editStage, getStageList} from "../store/reduxFunctions";
+import {deleteStage, editStage, getStageList} from "../store/reduxFunctions";
 import {Card, FormLabel} from "react-bootstrap";
 import {useRef} from "react";
 import {useState} from "react";
@@ -83,6 +83,11 @@ export function Step({stepData}) {
 
         dispatch(editStage(editState, selectedStage[0].id))
         dispatch({type: SELECT_STAGE_TO_EDIT, select: true})
+    }
+
+    function dltStage(e) {
+        const selectedStage = stageList.filter(s => s.id === stepData.id)
+        dispatch(deleteStage(selectedStage[0].id))
     }
 
     useEffect(() => {
@@ -247,7 +252,7 @@ export function Step({stepData}) {
                 }}>
                     <button onClick={(e) => {
                         // dltProcess()
-                        //dltStage
+                        dltStage(e)
                     }} className={'m-2'} size={'sm'}>
                         Delete
                     </button>
