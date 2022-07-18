@@ -91,7 +91,7 @@ export function Stage() {
     if (!currentProcess) {
         return (
             <>
-                <div><h2>please select a todo</h2></div>
+                <div style={{backgroundColor: 'linen'}}><h2>please select a todo</h2></div>
                 <div>
                     <form onSubmit={handleForm}>
                         <select ref={dropdown} onChange={onChangeProcess}>
@@ -119,7 +119,7 @@ export function Stage() {
     if (currentProcess) {
         return (
             <>
-                <div><h2>please select a todo</h2></div>
+                <div style={{backgroundColor: 'linen'}}><h2>please select a todo</h2></div>
                 <div>
                     <form onSubmit={handleForm}>
                         <select ref={dropdown} onChange={onChangeProcess}>

@@ -55,7 +55,7 @@ export function StepList() {
     }
 
     return <>
-        <div className={'row'}>
+        <div style={{backgroundColor: 'linen'}} className={'row'}>
             <Col>
                 <Card className={'m-2 col p-2'}>
                     <CardHeader className={'h2 text-center'}>to "{toDo}" takes steps...</CardHeader>

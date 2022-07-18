@@ -104,7 +104,7 @@ export function ToDoList() {
 
     return <>
         <div>
-            <div><font color="black"><h2>TODO List</h2></font></div>
+            <div style={{backgroundColor: 'linen'}}><font color="black"><h2>TODO List</h2></font></div>
             <form onSubmit={handleForm}>
                 <select ref={dropdown} onChange={onChangeProcess}>
                     <option value="default">Please select a TODO</option>
