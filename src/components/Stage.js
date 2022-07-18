@@ -1,8 +1,9 @@
 import {StepList} from "./StepList";
 import {useDispatch, useSelector} from "react-redux";
-import {STEP, TO_DO} from "../store/reducer";
+import {ON_CANCEL_PROCESS, START_SUCCESS, STEP, TO_DO} from "../store/reducer";
 import {useEffect, useRef, useState} from "react";
-import {addUser, getProcessList, getStageList, initCancelProcess} from "../store/reduxFunctions";
+import {addUser, getProcessList, getStageList, initCancelProcess, initStartProcess} from "../store/reduxFunctions";
+import {v4 as uuidv4} from 'uuid';
 
 export function Stage() {
 
@@ -56,7 +57,6 @@ export function Stage() {
     }
 
     function selectProcess() {
-        console.log(formState)
         if (formState.processToDo === undefined || formState.processToDo === 'Please select a TODO') {
             return;
         } else {
@@ -75,10 +75,17 @@ export function Stage() {
         } else {
             const processToStart = processList.filter(s => s.title === formState.processToDo)
             const processStarted = processToStart[0].title
+            // const token = uuidv4
             console.log(processStarted)
             dispatch(addUser(name.name, {processStarted}))
-            // dispatch(initStartProcess({name}))
+            dispatch(initStartProcess(name.name, {processStarted}))
+            dispatch({type: START_SUCCESS, name: name})
+            // dispatch({type: ON_START_PROCESS})
         }
+    }
+
+    function cancelProcess() {
+        initCancelProcess()
     }
 
     if (!currentProcess) {
@@ -100,7 +107,7 @@ export function Stage() {
                         <span className={'ml-2'}>
                     <button onClick={(e) => {
                         selectProcess()
-                    }} className={'m-2'} size={'sm'}>
+                    }} className="homeButtons" size={'sm'}>
                         Select
                     </button>
                 </span>
@@ -128,7 +135,7 @@ export function Stage() {
                         <span className={'ml-2'}>
                             <button onClick={(e) => {
                                 selectProcess()
-                            }} className={'m-2'} size={'sm'}>
+                            }} className="homeButtons" size={'sm'}>
                                 Select
                             </button>
                         </span>
@@ -136,12 +143,14 @@ export function Stage() {
                     <form onSubmit={startProcess}>
                         <input onChange={updateName} value={name.name} placeholder="please enter your name" type='text'/>
 
-                        <button type='submit'>START</button>
+                        <button className="homeButtons" type='submit'>START</button>
 
                         <span className={'ml-2'}>
                             <button onClick={(e) => {
-                                initCancelProcess(e)
-                            }} className={'m-2'} size={'sm'}>
+                                cancelProcess()
+                                //this is currently not working, it is submitting the start process as well.
+                                // dispatch({type: ON_CANCEL_PROCESS})
+                            }} className="homeButtons" size={'sm'}>
                                 CANCEL
                             </button>
                         </span>

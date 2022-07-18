@@ -5,8 +5,9 @@ import {ToDoList} from "./components/ToDoList";
 import {Stage} from "./components/Stage";
 import {StepList} from "./components/StepList";
 import {ToDo} from "./components/ToDo";
-import {EDITING_STAGE, EDITOR, FOLLOWER, LOGIN} from "./store/reducer";
+import {EDITING_STAGE, EDITOR, FOLLOWER, LOGIN, ON_HOME} from "./store/reducer";
 import {useState} from "react";
+import {initCancelProcess} from "./store/reduxFunctions";
 
 function App() {
 
@@ -33,7 +34,8 @@ function App() {
                 <div style={{backgroundColor: 'grey'}}><h1>EDITOR</h1></div>
                 <div style={{display: 'flex', justifyContent: "space-evenly", position: "absolute", top: 5, right: 10}}>
                     {/*<button onClick={()=> dispatch({type: GO_HOME})}>Go Home</button>*/}
-                    <button>Home</button>
+                    <button className="homeButtons" onClick={() => {
+                        dispatch({type: ON_HOME})}}> Home</button>
                 </div>
                 <Process/>
                 <ToDoList/>
@@ -46,7 +48,8 @@ function App() {
                 <div style={{backgroundColor: 'grey'}}><h1>EDITOR</h1></div>
                 <div style={{display: 'flex', justifyContent: "space-evenly", position: "absolute", top: 5, right: 10}}>
                     {/*<button onClick={()=> dispatch({type: GO_HOME})}>Go Home</button>*/}
-                    <button>Home</button>
+                    <button className="homeButtons" onClick={() => {
+                        dispatch({type: ON_HOME})}}>Home</button>
                 </div>
 
 
@@ -62,7 +65,8 @@ function App() {
                 <div style={{backgroundColor: 'grey'}}><h1>FOLLOWER</h1></div>
                 <div style={{display: 'flex', justifyContent: "space-evenly", position: "absolute", top: 5, right: 10}}>
                     {/*<button onClick={()=> dispatch({type: GO_HOME})}>Go Home</button>*/}
-                    <button>Home</button>
+                    <button className="homeButtons" onClick={() => {
+                        dispatch({type: ON_HOME})}}>Home</button>
                 </div>
                 <Stage/>
             </>
@@ -76,7 +80,7 @@ function App() {
                     welcome to DODO toDO's
                 </p>
             </header>
-            <div >
+            <div>
                 <form onSubmit={onSetRole}>
                     <input type="radio" onChange={handleRole} name="role" value="editor"/> EDITOR
                     <input type="radio" onChange={handleRole} name="role" value="follower"/> FOLLOWER

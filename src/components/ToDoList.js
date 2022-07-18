@@ -91,7 +91,6 @@ export function ToDoList() {
     }
 
     function selectProcess() {
-        console.log(formState)
         if (formState.processToDo === undefined || formState.processToDo === 'Please select a TODO') {
             return;
         } else {
@@ -116,24 +115,24 @@ export function ToDoList() {
                         }
                     )}}
                 </select>
-                <span className={'ml-2'}>
+                <span>
                     <button onClick={(e) => {
                         editProcess()
-                    }} className={'m-2'} size={'sm'}>
+                    }} className="homeButtons">
                         Edit
                     </button>
                 </span>
-                <span className={'ml-2'}>
-                    <button onClick={(e) => {
+                <span className="homeButtons">
+                    <button className="homeButtons" onClick={(e) => {
                         dltProcess()
-                    }} className={'m-2'} size={'sm'}>
+                    }} className="homeButtons" >
                         Delete
                     </button>
                 </span>
-                <span className={'ml-2'}>
-                    <button onClick={(e) => {
+                <span className="homeButtons">
+                    <button className="homeButtons" onClick={(e) => {
                         selectProcess()
-                    }} className={'m-2'} size={'sm'}>
+                    }} className="homeButtons" >
                         Select
                     </button>
                 </span>

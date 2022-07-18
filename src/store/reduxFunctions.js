@@ -11,9 +11,9 @@ import {
     EDIT_FAILURE,
     EDIT_SUCCESS,
     GET_PROCESS_LIST,
-    GET_STAGE_LIST, ON_ADD_USER,
+    GET_STAGE_LIST, ON_ADD_USER, ON_CANCEL_PROCESS, ON_START_FAILED, ON_START_REQUEST,
     STAGE_EDIT_FAILURE,
-    STAGE_EDIT_SUCCESS
+    STAGE_EDIT_SUCCESS, START_SUCCESS
 } from "./reducer";
 
 export function createProcess(newProcess) {
@@ -201,9 +201,52 @@ export function addUser(name, processStarted) {
     }
 }
 
+// export function initStartProcess(name) {
+//     return async function sideEffect(dispatch) {
+//         //sending data --> POST request
+//         // send it within the params
+//         // send it with the body
+//         dispatch({type: ON_START_REQUEST})
+//
+//         try {
+//             const response = await fetch("http://localhost:8080/startProcess", {
+//                 method: 'POST',
+//                 headers: {
+//                     'Accept': 'application/json', // willing to accept
+//                     'Content-Type': 'application/json' //defining what we are sending
+//                 },
+//                 body: JSON.stringify(name)
+//
+//             })
+//             const token = await response.json();
+//             console.log('token: ' +token);
+//             dispatch({type: START_SUCCESS, token: token, currentUser: name, startedProcess: true})
+//         } catch (e) {
+//             dispatch({type: ON_START_FAILED})
+//         }
+//     }
+// }
 
 
+//currently getting an 401 error on this. went a different route.
+export function initStartProcess(name, processStarted) {
+    return async function sideEffect(dispatch) {
+        dispatch({type: ON_START_REQUEST})
+
+        try {
+            const response = await fetch(`http://localhost:8080/startProcess?name=${name}&processStarted=${processStarted.processStarted}`)
+            if (response.ok) {
+                // const name = userInfor.name
+                const token = await response.json();
+                dispatch({type: START_SUCCESS, token: token, name: name});
+            }
+        } catch(e) {
+            dispatch({type: ON_START_FAILED})
+        }
+    }
+}
 
 export function initCancelProcess() {
-
+    return async function sideEffect(dispatch) {
+    dispatch({type: ON_CANCEL_PROCESS}) }
 }

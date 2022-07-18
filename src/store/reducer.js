@@ -1,7 +1,10 @@
+import {v4 as uuidv4} from 'uuid';
+
 export const EDITOR = 'reducer/EDITOR';
 export const FOLLOWER = 'reducer/EDITOR';
 export const LOGIN = 'LOGIN';
 export const ON_ADD_USER = 'ON_ADD_USER';
+export const ON_HOME = 'ON_HOME';
 
 export const GET_PROCESS_LIST = 'GET_PROCESS_LIST';
 export const GET_STAGE_LIST = 'GET_STAGE_LIST';
@@ -21,6 +24,10 @@ export const STAGE_EDIT_FAILURE = 'STAGE_EDIT_FAILURE';
 
 
 export const EDITING_STAGE = 'EDITING_STAGE';
+export const ON_START_REQUEST = 'ON_START_REQUEST';
+export const START_SUCCESS = 'START_SUCCESS';
+export const ON_START_FAILED = 'ON_START_FAILED';
+export const ON_CANCEL_PROCESS = 'ON_CANCEL_PROCESS';
 
 const initState = {
 
@@ -29,8 +36,13 @@ const initState = {
     role: 'home',
 
     token: null,
+    currentUser: null,
     userList: [],
-    startMessage: "",
+    startMessage: "your process has started... please stay focused and achieve your ultimate reality",
+
+    startedProcess: false,
+    startPending: false,
+    startFailed: false,
 
     processList: [],
     processMessage: "",
@@ -51,14 +63,17 @@ const initState = {
     selectedStage: null,
     selectedStep: null,
     step: null,
-    stepOption: null,
-
-    startedProcess: false,
+    stepOption: null
 
 }
 
 export function reducer(state = initState, action) {
     switch (action?.type) {
+        case ON_HOME:
+            return {
+                ...state,
+                role: 'home'
+            }
         case LOGIN:
             return {
                 ...state,
@@ -173,7 +188,45 @@ export function reducer(state = initState, action) {
                 selectedStage: null,
                 editFailed: true
             }
+        // case ON_START_PROCESS:
+        //     return {
+        //         ...state,
+        //         startedProcess: true
+        //     }
 
+        case ON_START_REQUEST:
+            // if you uncomment this, this bug will happen: it wont let you sign in right after you make a user.
+            // but it will eliminate the error of signing in without a username in the db. --->
+            // const foundUser = state.userList.find(user => user.username === action.loginInfo.username && user.password === action.loginInfo.password);
+            //     if (!foundUser) {
+            //         alert('invalid login')
+            //         return {...state}
+            //     }
+            //         alert('valid login')
+            return {
+                ...state,
+                startPending: true
+            }
+        case START_SUCCESS:
+            return {
+                ...state,
+                token: new Date().getMilliseconds(),
+                currentUser: action.name,
+                startPending: false,
+                startFailed: false,
+                startedProcess: true
+            }
+        case ON_START_FAILED:
+            return {
+                ...state,
+                startPending: false,
+                startFailed: true
+            }
+        case ON_CANCEL_PROCESS:
+            return {
+                ...state,
+                startedProcess: false
+            }
         default:
             return {...state}
     }

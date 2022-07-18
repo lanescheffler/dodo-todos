@@ -20,7 +20,7 @@ export function ToDo() {
         processId: toDo[0].title.toString(),
 
         orderNumber: null,
-        pending: true,
+        pending: false,
         done: false,
 
         comments: 'please enter comments',
@@ -35,16 +35,16 @@ export function ToDo() {
                   className={'d-flex w-80 p-3 m-auto'}
                   border={'black'}>
 
-                    <span>
-                        PROCESS: [{toDo[0].title}] || STATUS:
+                    <span style={{color: "white"}}>
+                        PROCESS: "<strong style={{color: "black"}}>{toDo[0].title}</strong>" || STATUS:
                     </span>
                 <span>
-                        IS FINISHED: {toDo[0].finished.toString()}
+                        IS FINISHED: <strong style={{color: "black"}}>{toDo[0].finished.toString()}</strong>
                     </span>
                 {/*this will be where the multiple choice is for 'todo' or 'started' or 'done'*/}
                 <div
                     style={{display: 'flex', justifyContent: "space-evenly", position: "absolute", top: 10, right: 10}}>
-                    <button onClick={(e) => {
+                    <button className="homeButtons" onClick={(e) => {
                         dispatch(createStage({stageState: stageState, newStage}))
                         setStageState(newStage)
                     }}>ADD STEP

@@ -40,7 +40,7 @@ export function Process() {
         processId: newProcess.title.toString(),
 
         orderNumber: null,
-        pending: true,
+        pending: false,
         done: false,
 
         comments: 'please enter comments',
@@ -122,7 +122,7 @@ export function Process() {
                         <input onChange={updateTitle} value={editState.title}
                                placeholder={selectedProcess[0].title} type='text'/>
 
-                        <button type='submit'>Submit</button>
+                        <button className="homeButtons" type='submit'>Submit</button>
                     </Form.Group>
                 </Form>
 
@@ -141,7 +141,7 @@ export function Process() {
                 <Form.Group className={'mb-3'}>
                     <Form.Label>I NEED TO... </Form.Label>
                     <input onChange={updateTitle} value={formState.title} placeholder="build a website" type='text'/>
-                    <button type='submit'>Submit</button>
+                    <button className="homeButtons" type='submit'>Submit</button>
                 </Form.Group>
             </Form>
 
