@@ -78,8 +78,8 @@ export function Stage() {
             // const token = uuidv4
             console.log(processStarted)
             dispatch(addUser(name.name, {processStarted}))
-            dispatch(initStartProcess(name.name, {processStarted}))
-            dispatch({type: START_SUCCESS, name: name})
+            // dispatch(initStartProcess(name.name, {processStarted}))
+            // dispatch({type: START_SUCCESS, name: name, processStarted: processStarted})
             // dispatch({type: ON_START_PROCESS})
         }
     }

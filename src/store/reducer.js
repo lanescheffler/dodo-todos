@@ -1,4 +1,4 @@
-import {v4 as uuidv4} from 'uuid';
+// import {v4 as uuidv4} from 'uuid';
 
 export const EDITOR = 'reducer/EDITOR';
 export const FOLLOWER = 'reducer/EDITOR';
@@ -210,7 +210,7 @@ export function reducer(state = initState, action) {
         case START_SUCCESS:
             return {
                 ...state,
-                token: new Date().getMilliseconds(),
+                token: action.token,
                 currentUser: action.name,
                 startPending: false,
                 startFailed: false,

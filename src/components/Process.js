@@ -135,7 +135,7 @@ export function Process() {
     return (
         <Card className={'w-80 text-left m-auto'}>
             <CardHeader style={{backgroundColor: "brown", color: 'black'}} className={'fs-3'}>
-                CREAT A TODO
+                CREATE A TODO
             </CardHeader>
             <Form className={'p-3'} onSubmit={addProcess} style={{backgroundColor: 'grey'}}>
                 <Form.Group className={'mb-3'}>

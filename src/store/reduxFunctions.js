@@ -194,6 +194,7 @@ export function addUser(name, processStarted) {
                 // const name = userInfor.name
                 // const processStarted = userInfor.processStarted
                 dispatch({type: ON_ADD_USER, userInfor: {name: name, processStarted: processStarted}});
+                dispatch(initStartProcess(name, processStarted));
             }
         } catch(e) {
             console.log(e)
@@ -235,10 +236,12 @@ export function initStartProcess(name, processStarted) {
 
         try {
             const response = await fetch(`http://localhost:8080/startProcess?name=${name}&processStarted=${processStarted.processStarted}`)
+            console.log("response: " + response)
             if (response.ok) {
-                // const name = userInfor.name
                 const token = await response.json();
-                dispatch({type: START_SUCCESS, token: token, name: name});
+                console.log("this is a token: " + token)
+                console.log("name :" + name )
+                dispatch({type: START_SUCCESS, token, name});
             }
         } catch(e) {
             dispatch({type: ON_START_FAILED})
