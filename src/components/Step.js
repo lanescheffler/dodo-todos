@@ -86,6 +86,12 @@ export function Step({stepData}) {
         }
     }
 
+    //function anotherHandlePending
+    //  to set the form state
+
+    //function anotherHandleDone
+    //  to set the form state
+
     // function onSetStatus(e) {
     //     e.preventDefault()
     //     dispatch({type: STATUS, role: thisStatus})
@@ -181,7 +187,7 @@ export function Step({stepData}) {
             please complete all the following steps before submit.
 
             <Card onSubmit={handleForm}
-                  style={{backgroundColor: 'grey', color: 'white'}}
+                  style={{backgroundColor: 'linen', color: 'black'}}
                   className={'d-flex float-start w-100 p-2 m-1'}
                   border={'secondary'}>
 
@@ -191,18 +197,17 @@ export function Step({stepData}) {
                   step: [{stepData.orderNumber}]
                 </FormLabel>
 
-                <select ref={dropdown}>
-                        <option value="default">123...</option>
+                {/*<select ref={dropdown}>*/}
+                {/*        <option value="default">123...</option>*/}
                     {/*//need to write more code here for selecting order*/}
-                    </select>
+                    {/*</select>*/}
 
 
                 <FormLabel classname={''}>
                     | Promptu:
 
                     {/*<input value={selectedStage[0].promptu} type={'text'}/> */}
-
-                    [{stepData.promptu}]
+                    [<strong style={{color: "brown"}}>{stepData.promptu}</strong>]
                 </FormLabel>
 
                 <FormLabel className={''}>

@@ -76,7 +76,6 @@ export function Stage() {
             const processToStart = processList.filter(s => s.title === formState.processToDo)
             const processStarted = processToStart[0].title
             // const token = uuidv4
-            console.log(processStarted)
             dispatch(addUser(name.name, {processStarted}))
             // dispatch(initStartProcess(name.name, {processStarted}))
             // dispatch({type: START_SUCCESS, name: name, processStarted: processStarted})
@@ -141,19 +140,9 @@ export function Stage() {
                         </span>
                     </form>
                     <form onSubmit={startProcess}>
-                        <input onChange={updateName} value={name.name} placeholder="please enter your name" type='text'/>
+                    <input onChange={updateName} value={name.name} placeholder="please enter your name" type='text'/>
 
-                        <button className="homeButtons" type='submit'>START</button>
-
-                        <span className={'ml-2'}>
-                            <button onClick={(e) => {
-                                cancelProcess()
-                                //this is currently not working, it is submitting the start process as well.
-                                // dispatch({type: ON_CANCEL_PROCESS})
-                            }} className="homeButtons" size={'sm'}>
-                                CANCEL
-                            </button>
-                        </span>
+                    <button className="homeButtons" type='submit'>START</button>
                     </form>
                 </div>
                 <StepList/>

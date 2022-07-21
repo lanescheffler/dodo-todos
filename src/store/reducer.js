@@ -72,7 +72,9 @@ export function reducer(state = initState, action) {
         case ON_HOME:
             return {
                 ...state,
-                role: 'home'
+                role: 'home',
+                toDo: null,
+                startedProcess: false
             }
         case LOGIN:
             return {
@@ -225,6 +227,8 @@ export function reducer(state = initState, action) {
         case ON_CANCEL_PROCESS:
             return {
                 ...state,
+                token: null,
+                toDo: null,
                 startedProcess: false
             }
         default:

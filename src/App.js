@@ -15,7 +15,6 @@ function App() {
 
     const role = useSelector(state => state.role)
     const toDo = useSelector(state => state.toDo)
-    console.log("current role state: " + role)
 
     const [thisRole, setRole] = useState();
 
@@ -88,9 +87,6 @@ function App() {
                 </form>
             </div>
         </div>
-
-        }
-
     </>
 
 }
