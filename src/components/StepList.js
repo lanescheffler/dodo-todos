@@ -1,7 +1,7 @@
 import {useEffect} from "react";
 import {getStageList} from "../store/reduxFunctions";
 import {useDispatch, useSelector} from "react-redux";
-import {Card, Col} from "react-bootstrap";
+import {Card, Col, FormLabel} from "react-bootstrap";
 import CardHeader from "react-bootstrap/CardHeader";
 import {Step} from "./Step";
 
@@ -71,33 +71,40 @@ export function StepList() {
                 {/*filters the unfinished quizzes from the user's assigned quizzes*/}
                 {/*we then map over that new array, returning the user's quiz information*/}
                 {filteredStageList.filter(s => s.pending === true).map((p)=>{
-                    return <div key={p.id} style={{marginBottom: '1rem'}}>
-                        <div style={{margin: '1rem', display:'inline'}}>{p.promptu}</div>
-                        {/*//this is part of the onsubmit functionality*/}
-                        {/*<input onChange={onAnswerChange} type={'text'}/>*/}
-                        <input type={'text'}/>
-                        {/*the code below is passing the quiz id OR p.id into our answer function*/}
-                        {/*<button onClick = {() => Answer(p.id)} type={"button"}>Submit</button> <br />*/}
-                        <button type={"button"}>Submit</button> <br />
-                    </div>
+                    return <Card>
+                        <div className={'d-flex float-start w-100 p-2 m-1'} key={p.id} style={{backgroundColor: 'linen', color: 'black', marginBottom: '3rem'}}>
+                            Step: "<strong style={{color: "brown"}}>{p.promptu}</strong>" ...is
+                            {/*//this is part of the onsubmit functionality*/}
+                            {/*the code below is passing the quiz id OR p.id into our answer function*/}
+
+                            <input type={'radio'}
+                                   className={'m-1'}
+                                   name="statuz"
+                                   value="pending"
+                            /> Pending:
+
+                            <input
+                                type={'radio'}
+                                className={'m-1'}
+                                name="statuz"
+                                value="done"/>  Done:  | comments:
+                            {/*<input onChange={onCommentsChange} type={'text'}/>*/}
+                            {/*<button onClick = {() => Answer(p.id)} type={"button"}>Submit</button> <br />*/}
+                        </div>
+                    </Card>
                 })}
                 <h2>Completed Steps</h2>
                 {filteredStageList.filter(s =>s.done === true ).map((s)=>{
-                    return <div key = {s.id}>
-                        <Card style={{backgroundColor: '#E7DFC6', color: '#607744'}}
-                              className={'d-flex float-start w-25 p-2 m-1'}
-                              border={'secondary'}>
+                    return <Card>
+                        <div key = {s.id} style={{backgroundColor: 'linen', color: 'black'}}
+                             className={'d-flex float-start w-100 p-2 m-1'}>
 
-                            <span className={'text-decoration-underline'}> Step: </span> {s.promptu}
-                            <span className={'text-decoration-underline'}> is Pending: </span> {s.pending}
-                            {/*might have to change this - its reading as function*/}
-                            <span className={'text-decoration-underline'}> is Done: </span>{s.done}
-                            <span className={'text-decoration-underline'}> Comments: </span>{s.comments}
-                            {/*<span>{quizData.applicant}</span>*/}
-                            <span> {s.done? "done" : "pending"}</span>
-                        </Card>
 
-                    </div>
+                            Step:  "{s.promptu}" is...
+                            {s.done? "done" : "pending"}.
+                            Comments: {s.comments}
+                        </div>
+                    </Card>
                 })}
 
             </>

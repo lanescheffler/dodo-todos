@@ -144,6 +144,10 @@ export function Stage() {
 
                     <button className="homeButtons" type='submit'>START</button>
                     </form>
+
+                    <button onClick={(e) => {
+                        cancelProcess()
+                    }} className="homeButtons">CANCEL</button>
                 </div>
                 <StepList/>
             </>
