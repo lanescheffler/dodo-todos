@@ -1,6 +1,6 @@
 import {StepList} from "./StepList";
 import {useDispatch, useSelector} from "react-redux";
-import {ON_CANCEL_PROCESS, START_SUCCESS, STEP, TO_DO} from "../store/reducer";
+import {ON_CANCEL_PROCESS, ON_HOME, START_SUCCESS, STEP, TO_DO} from "../store/reducer";
 import {useEffect, useRef, useState} from "react";
 import {addUser, getProcessList, getStageList, initCancelProcess, initStartProcess} from "../store/reduxFunctions";
 import {v4 as uuidv4} from 'uuid';
@@ -83,9 +83,9 @@ export function Stage() {
         }
     }
 
-    function cancelProcess() {
-        initCancelProcess()
-    }
+    // function cancelProcess() {
+    //     initCancelProcess()
+    // }
 
     if (!currentProcess) {
         return (
@@ -140,14 +140,16 @@ export function Stage() {
                         </span>
                     </form>
                     <form onSubmit={startProcess}>
-                    <input onChange={updateName} value={name.name} placeholder="please enter your name" type='text'/>
+                        <input onChange={updateName} value={name.name} placeholder="please enter your name"
+                               type='text'/>
 
-                    <button className="homeButtons" type='submit'>START</button>
+                        <button className="homeButtons" type='submit'>START</button>
+                        <button className="homeButtons" onClick={() => {
+                            dispatch({type: ON_CANCEL_PROCESS})
+                        }}>CANCEL
+                        </button>
+
                     </form>
-
-                    <button onClick={(e) => {
-                        cancelProcess()
-                    }} className="homeButtons">CANCEL</button>
                 </div>
                 <StepList/>
             </>

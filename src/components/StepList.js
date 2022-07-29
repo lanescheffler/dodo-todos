@@ -107,7 +107,6 @@ export function StepList() {
                             {/*the code below is passing the quiz id OR p.id into our answer function*/}
 
                             <FormLabel className={''}>
-                                THIS STEP: is...
                                 <input type={'radio'}
                                        className={'m-1'}
                                        onChange={handlePendingStatus}
@@ -122,11 +121,11 @@ export function StepList() {
                                     className={'m-1'}
                                     onChange={handleDoneStatus}
                                     name="statuz"
-                                    value="done"/>  Done:  |
+                                    value="done"/>  Done:  |   comments:
                             </FormLabel>
 
                             <input onChange={onCommentsChange} type={'text'}/>
-                            <button onClick = {() => Complete(p.id)} type={"button"}>Submit</button> <br />
+                                <button onClick = {() => Complete(p.id)} type={"button"}>Submit</button> <br />
                         </div>
                     </Card>
                 })}

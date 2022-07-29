@@ -36,7 +36,7 @@ export function ToDo() {
                   border={'black'}>
 
                     <span style={{color: "white"}}>
-                        PROCESS: "<strong style={{color: "black"}}>{toDo[0].title}</strong>" || STATUS:
+                        PROCESS: "<strong style={{color: "black"}}>{toDo[0].title}</strong>"
                     </span>
                 <span>
                         IS FINISHED: <strong style={{color: "black"}}>{toDo[0].finished.toString()}</strong>

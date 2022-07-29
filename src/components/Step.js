@@ -125,9 +125,24 @@ export function Step({stepData}) {
         }
     }
 
+    function updateOrderNumber(e){
+
+        if (stageEditing) {
+            setEditState({
+                ...editState,
+                orderNumber: e.target.value,
+            })
+        } else {
+            setFormState({
+                ...formState,
+                orderNumber: e.target.value,
+            })
+        }
+    }
+
 
     function onEditSubmit() {
-        if (editState.promptu === "") {
+        if (editState.promptu === " ") {
             return
         }
         dispatch(editStage(editState, selectedStage[0].id))
@@ -274,18 +289,25 @@ export function Step({stepData}) {
 
             <span className={'stepText'}>
 
-                <FormLabel classname={''}>
+                <FormLabel className={''}>
                   [{stepData.orderNumber}] | Edit Order Number:
                 </FormLabel>
 
-                <select ref={dropdown}>
-                        <option value="default">123...</option>
-                    {/*//need to write more code here for selecting order*/}
-                    </select>
+                {/*<select ref={dropdown}>*/}
+                {/*        <option value="default">123...</option>*/}
+                {/*    </select>*/}
+                {/*//need to write more code here for selecting order*/}
+
+
+                <FormLabel>
+                    <input required onChange={updateOrderNumber}
+                           type={'number'} min="1" max="100"
+                           name="orderNumber"/>
+                </FormLabel>
 
 
                 <FormLabel classname={''}>
-                    | Edit Prompt:  <input
+                    | Edit Prompt:  <input required
                     onChange={updatePromptu}
                     placeholder={selectedStage[0].promptu}
                     type={'text'}/> [{stepData.promptu}]
@@ -293,7 +315,8 @@ export function Step({stepData}) {
 
                 <FormLabel className={''}>
                     STATUS: is...
-                    <input type={'radio'}
+                    <input required
+                           type={'radio'}
                            className={'m-1'}
                            onChange={handlePendingStatus}
                            name="statuz"
@@ -303,6 +326,7 @@ export function Step({stepData}) {
 
                 <FormLabel className={''}>
                     <input
+                        required
                         type={'radio'}
                         className={'m-1'}
                         onChange={handleDoneStatus}
@@ -310,8 +334,8 @@ export function Step({stepData}) {
                         value="done"/>  Done:  |
                 </FormLabel>
 
-                <FormLabel classname={''}>
-                    | comments:  <input
+                <FormLabel className={''}>
+                    | comments:  <input required
                     onChange={updateComments}
                     placeholder={selectedStage[0].comments}
                     type={'text'}/> [{stepData.comments}]
