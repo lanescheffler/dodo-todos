@@ -346,6 +346,7 @@ export function Step({stepData}) {
                     | comments:  <input required
                     onChange={updateComments}
                     placeholder={selectedStage[0].comments}
+                    defaultValue={selectedStage[0].comments}
                     type={'text'}/> [{stepData.comments}]
                 </FormLabel>
 
