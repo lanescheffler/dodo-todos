@@ -310,6 +310,7 @@ export function Step({stepData}) {
                     | Edit Prompt:  <input required
                     onChange={updatePromptu}
                     placeholder={selectedStage[0].promptu}
+                    defaultValue={selectedStage[0].promptu}
                     type={'text'}/> [{stepData.promptu}]
                 </FormLabel>
 

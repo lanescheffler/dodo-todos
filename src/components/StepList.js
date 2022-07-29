@@ -36,9 +36,8 @@ export function StepList() {
 
     const [formState, setFormState] = useState('')
 
-    // takes in the applicant's quiz id to send to be passed into a redux function
+
     function Complete(s) {
-        // dispatches function with the user's answer and quiz id
         dispatch(CompleteStep(formState, s))
         setFormState('')
     }
