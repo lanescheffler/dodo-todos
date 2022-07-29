@@ -245,6 +245,34 @@ export function initStartProcess(name, processStarted) {
     }
 }
 
+
+export function CompleteStep(stepToComplete, stepId) {
+
+    return async function sideEffect(dispatch) {
+        try {
+            const response = await fetch(`http://localhost:8080/completeStep/${stepId}`, {
+                method: 'PUT',
+                headers: {
+                    'Accept': 'application/json', // willing to accept
+                    'Content-Type': 'application/json', //defining what we are sending
+                    "Access-Control-Allow-Origin" : "*"
+                },
+                body: JSON.stringify(stepToComplete)
+            })
+            if (response.ok)
+                console.log("update successful")
+            else {
+                console.log("update not successful")
+            }
+            dispatch(getStageList())
+
+        } catch(e) {
+            console.log(e)
+        }
+    }
+}
+
+
 export function initCancelProcess() {
     return async function sideEffect(dispatch) {
     dispatch({type: ON_CANCEL_PROCESS}) }

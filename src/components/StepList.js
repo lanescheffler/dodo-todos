@@ -1,5 +1,5 @@
-import {useEffect} from "react";
-import {getStageList} from "../store/reduxFunctions";
+import {useEffect, useState} from "react";
+import {CompleteStep, getStageList} from "../store/reduxFunctions";
 import {useDispatch, useSelector} from "react-redux";
 import {Card, Col, FormLabel} from "react-bootstrap";
 import CardHeader from "react-bootstrap/CardHeader";
@@ -34,6 +34,35 @@ export function StepList() {
 
     const startedProcess = useSelector(state => state.startedProcess)
 
+    const [formState, setFormState] = useState('')
+
+    // takes in the applicant's quiz id to send to be passed into a redux function
+    function Complete(s) {
+        // dispatches function with the user's answer and quiz id
+        dispatch(CompleteStep(formState, s))
+        setFormState('')
+    }
+
+    function handlePendingStatus(e) {
+            setFormState({
+                ...formState,
+                pending: e.target.checked,
+            })
+    }
+
+    function handleDoneStatus(e) {
+            setFormState({
+                ...formState,
+                done: e.target.checked,
+            })
+    }
+
+    function onCommentsChange(e) {
+        setFormState({
+            ...formState,
+            comments: e.target.value
+        })
+    }
 
     if(stageEditing) {
         return (
@@ -77,19 +106,27 @@ export function StepList() {
                             {/*//this is part of the onsubmit functionality*/}
                             {/*the code below is passing the quiz id OR p.id into our answer function*/}
 
-                            <input type={'radio'}
-                                   className={'m-1'}
-                                   name="statuz"
-                                   value="pending"
-                            /> Pending:
+                            <FormLabel className={''}>
+                                THIS STEP: is...
+                                <input type={'radio'}
+                                       className={'m-1'}
+                                       onChange={handlePendingStatus}
+                                       name="statuz"
+                                       value="pending"
+                                /> Pending:
+                            </FormLabel>
 
-                            <input
-                                type={'radio'}
-                                className={'m-1'}
-                                name="statuz"
-                                value="done"/>  Done:  | comments:
-                            {/*<input onChange={onCommentsChange} type={'text'}/>*/}
-                            {/*<button onClick = {() => Answer(p.id)} type={"button"}>Submit</button> <br />*/}
+                            <FormLabel className={''}>
+                                <input
+                                    type={'radio'}
+                                    className={'m-1'}
+                                    onChange={handleDoneStatus}
+                                    name="statuz"
+                                    value="done"/>  Done:  |
+                            </FormLabel>
+
+                            <input onChange={onCommentsChange} type={'text'}/>
+                            <button onClick = {() => Complete(p.id)} type={"button"}>Submit</button> <br />
                         </div>
                     </Card>
                 })}
