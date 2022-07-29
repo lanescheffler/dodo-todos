@@ -140,6 +140,13 @@ export function Step({stepData}) {
         }
     }
 
+    function updateEditState() {
+        setEditState({
+            ...editState,
+            orderNumber: selectedStage[0]
+
+        })
+    }
 
     function onEditSubmit() {
         if (editState.promptu === " ") {
@@ -410,6 +417,7 @@ export function Step({stepData}) {
                         // editProcess()
                         //editStage
                         const selectedStage = stageList.filter(s => s.id === stepData.id)
+                        updateEditState()
                         dispatch({type: EDITING_STAGE, selectedStage: selectedStage})
                     }} className="homeButtons" size={'sm'}>
                         Edit
