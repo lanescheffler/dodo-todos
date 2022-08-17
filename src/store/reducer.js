@@ -74,7 +74,8 @@ export function reducer(state = initState, action) {
                 ...state,
                 role: 'home',
                 toDo: null,
-                startedProcess: false
+                startedProcess: false,
+                token: null
             }
         case LOGIN:
             return {

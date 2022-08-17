@@ -38,9 +38,9 @@ export function ToDo() {
                     <span style={{color: "white"}}>
                         PROCESS: "<strong style={{color: "black"}}>{toDo[0].title}</strong>"
                     </span>
-                <span>
-                        IS FINISHED: <strong style={{color: "black"}}>{toDo[0].finished.toString()}</strong>
-                    </span>
+                {/*<span>*/}
+                {/*        IS FINISHED: <strong style={{color: "black"}}>{toDo[0].finished.toString()}</strong>*/}
+                {/*    </span>*/}
                 {/*this will be where the multiple choice is for 'todo' or 'started' or 'done'*/}
                 <div
                     style={{display: 'flex', justifyContent: "space-evenly", position: "absolute", top: 10, right: 10}}>

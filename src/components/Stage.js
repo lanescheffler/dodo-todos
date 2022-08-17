@@ -139,8 +139,8 @@ export function Stage() {
                             </button>
                         </span>
                     </form>
-                    <form onSubmit={startProcess}>
-                        <input onChange={updateName} value={name.name} placeholder="please enter your name"
+                    <form required onSubmit={startProcess}>
+                        <input required onChange={updateName} value={name.name} placeholder="please enter your name"
                                type='text'/>
 
                         <button className="homeButtons" type='submit'>START</button>
